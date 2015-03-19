@@ -33,7 +33,11 @@ PImage capture_img;
 color pixel_value;
 
 // S O R T I N G
-int mode = 0;
+//MODE:
+//0 -> black
+//1 -> bright
+//2 -> white
+int mode = 1;
 int loops = 1;
 int blackValue = -10000000;
 int brigthnessValue = 60;
@@ -50,19 +54,26 @@ boolean capture_pause = false;
 boolean update_capture_window = true;
 int update_image;
 
-int[] fx_toggle; //1: brightness type, 2: contrast type
+int[] fx_toggle; 
+/*  FX TOGGLE LEGEND:
+    0: RGB CC space
+    1: brightness space 
+    2: contrast space
+    3: hue space
+    4: saturation space
+    5: sharpening
+    6: fancy contrast
+    7: party mode
+*/
+float user_red = 0.;
+float user_green = 0.;
+float user_blue = 0.;
 float brightness_val = 0.;
 float contrast_val = 0.;
 float threshold_val = 0.;
-float red_val = 0.;
-float green_val = 0.;
-float blue_val = 0.;
 float exp_val = 1.0;
 
 CheckBox checkbox_toggles;
-Slider red_slider;
-Slider green_slider;
-Slider blue_slider;
 int cp5_mx = 15;
 int cp5_my = 10;
 float fps;

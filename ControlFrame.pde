@@ -37,11 +37,7 @@ public class ControlFrame extends PApplet {
     cp5.addSlider("width").setRange(4, 1440).setValue(1150).setPosition(cp5_mx,40+cp5_my);
     cp5.addSlider("height").setRange(4, 900).setValue(480).setPosition(cp5_mx,50+cp5_my);
     
-    // Set up RGB cc sliders and reset buttons
-    red_slider = cp5.addSlider("red").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,80+cp5_my);
-    green_slider = cp5.addSlider("green").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,90+cp5_my);
-    blue_slider = cp5.addSlider("blue").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,100+cp5_my);
-    
+    // R E S E T   B U T T O N S
     cp5.addButton("redB") .setPosition(int(cp5_mx*.25),80+cp5_my)
                           .setSize(9,9)
                           .setLabelVisible(false)
@@ -64,6 +60,9 @@ public class ControlFrame extends PApplet {
                                 .hideLabels()
                                 ;
     // CC sliders
+    cp5.addSlider("red").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,80+cp5_my);
+    cp5.addSlider("green").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,90+cp5_my);
+    cp5.addSlider("blue").setRange(-1.0, 1.0).setValue(0.0).setPosition(cp5_mx,100+cp5_my);
     cp5.addSlider("brightness").setRange(-100, 100.0).setValue(0.0).setPosition(cp5_mx,120+cp5_my);
     cp5.addSlider("contrast").setRange(-100, 100.0).setValue(0.0).setPosition(cp5_mx,130+cp5_my);
     cp5.addSlider("threshold").setRange(0.0, 1.0).setValue(1.0).setPosition(cp5_mx,140+cp5_my);
@@ -89,52 +88,17 @@ public class ControlFrame extends PApplet {
       update_capture_window = true;
     }  
 
-    if (theEvent.isFrom(red_slider)) {
-      red_val = (theEvent.getController().getValue());
-    }
-    if (theEvent.isFrom(green_slider)) {
-      green_val = (theEvent.getController().getValue());
-    }
-    if (theEvent.isFrom(blue_slider)) {
-      blue_val = (theEvent.getController().getValue());
-    }
-
-    // B U T T O N S
-    if (theEvent.isFrom(cp5.getController("redB"))) {
-      red_slider.setValue(0.0);
-      red_val = 0.0;
-    }
-    if (theEvent.isFrom(cp5.getController("greenB"))) {
-      green_slider.setValue(0.0);
-      green_val = 0.0;
-    }
-    if (theEvent.isFrom(cp5.getController("blueB"))) {
-      blue_slider.setValue(0.0);
-      blue_val = 0.0;
-    }
-
-    // F X   T O G G L E S
-    if (theEvent.isFrom(checkbox_toggles)) {
-      int size = checkbox_toggles.getArrayValue().length;
-      fx_toggle = new int[size];
-
-      for (int i = 0; i < size; i++) {
-        int n = (int)checkbox_toggles.getArrayValue()[i];
-        fx_toggle[n] = (int)checkbox_toggles.getArrayValue()[n];
-        }
-
-        // update brightness appropriately
-        float cur_brightness = cp5.getController("brightness").getValue();
-        if (fx_toggle[0]==0) brightness_val = cur_brightness / 100;
-        else if (fx_toggle[0]==1) brightness_val = cur_brightness / 100.0;
-
-        // update contrast appropriately
-        float cur_contrast = cp5.getController("contrast").getValue();
-        if (fx_toggle[1]==0) contrast_val = pow((100 + cur_contrast) / 100, 2.0);
-        else if (fx_toggle[1]==1) contrast_val = cur_contrast / 100.0;
-    }
 
     // A D J U S T M E N T   S L I D E R S
+    if (theEvent.isFrom(cp5.getController("red"))) {
+      red_val = (theEvent.getController().getValue());
+    }
+    if (theEvent.isFrom(cp5.getController("green"))) {
+      green_val = (theEvent.getController().getValue());
+    }
+    if (theEvent.isFrom(cp5.getController("blue"))) {
+      blue_val = (theEvent.getController().getValue());
+    } 
     if (theEvent.isFrom(cp5.getController("brightness"))) {
       float cur_brightness = theEvent.getController().getValue();
       if (fx_toggle[0]==0) brightness_val = cur_brightness / 100;
@@ -155,6 +119,46 @@ public class ControlFrame extends PApplet {
     if (theEvent.isFrom(cp5.getController("sort: black value"))) {
       blackValue = int((theEvent.getController().getValue()));
     }
+
+
+    // R E S E T   B U T T O N S
+    if (theEvent.isFrom(cp5.getController("redB"))) {
+      cp5.getController("red").setValue(0.0);
+      red_val = 0.0;
+    }
+    if (theEvent.isFrom(cp5.getController("greenB"))) {
+      cp5.getController("green").setValue(0.0);
+      green_val = 0.0;
+    }
+    if (theEvent.isFrom(cp5.getController("blueB"))) {
+      cp5.getController("blue").setValue(0.0);
+      blue_val = 0.0;
+    }
+
+
+    // F X   T O G G L E S
+    if (theEvent.isFrom(checkbox_toggles)) {
+      int size = checkbox_toggles.getArrayValue().length;
+      fx_toggle = new int[size];
+
+      for (int i = 0; i < size; i++) {
+        int n = (int)checkbox_toggles.getArrayValue()[i];
+        fx_toggle[n] = (int)checkbox_toggles.getArrayValue()[n];
+        }
+
+      // update brightness appropriately
+      float cur_brightness = cp5.getController("brightness").getValue();
+      if (fx_toggle[0]==0) brightness_val = cur_brightness / 100;
+      else if (fx_toggle[0]==1) brightness_val = cur_brightness / 100.0;
+
+      // update contrast appropriately
+      float cur_contrast = cp5.getController("contrast").getValue();
+      if (fx_toggle[1]==0) contrast_val = pow((100 + cur_contrast) / 100, 2.0);
+      else if (fx_toggle[1]==1) contrast_val = cur_contrast / 100.0;
+    }
+
+
+
   }
 
 
