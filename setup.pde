@@ -12,6 +12,7 @@ void setup() {
   // Set up initial values
   pixel_value = color(255,255,255,255);
   display = createImage(capture_window_width, capture_window_height, RGB);
+  capture_img = createImage(capture_window_width, capture_window_height, RGB);
   
   fx_toggle = new int[3]; //1: brightness type, 2: contrast type
   

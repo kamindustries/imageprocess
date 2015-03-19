@@ -406,9 +406,9 @@ void main() {
   // if (darks <= .15){
   // if (darks >= .15){
     // vec2 sort = vec2(vertTexCoord.s - pow((.3*(mod(BCH.x,.1))),.8), vertTexCoord.t);
-    vec2 sort = vec2(vertTexCoord.s - pow((.2*(mod(darks,mod(float(ttime),2.)))),2.), vertTexCoord.t);
-    vec4 slide = texture2D(texture, sort);
-    col.rgb = slide.rgb;
+    // vec2 sort = vec2(vertTexCoord.s - pow((.2*(mod(darks,mod(float(ttime),2.)))),2.), vertTexCoord.t);
+    // vec4 slide = texture2D(texture, sort);
+    // col.rgb = slide.rgb;
   // }
 
   // vec2 BCH_st = vec2(vertTexCoord.t, vertTexCoord.s);
@@ -458,6 +458,13 @@ void main() {
   //   }
   // }
   // col.r = mod(vertTexCoord.s,.1)*10.;
+
+  // if (vertTexCoord.s<=.0005){
+  //   for (int i=0; i<100; i++){
+  //     vec4 mash = texture2D(texture, vec2(vertTexCoord.s, vertTexCoord.t+(float(i)/100.)));
+
+  //   }
+  // }
 
   gl_FragColor = col;
 

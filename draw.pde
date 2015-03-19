@@ -24,7 +24,6 @@ void draw() {
   shader(bwShader);
 
   image(display, 0, 0, capture_window_width, capture_window_height);
-  
   resetShader();
 
   

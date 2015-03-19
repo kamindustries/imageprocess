@@ -68,6 +68,7 @@ public class ControlFrame extends PApplet {
     cp5.addSlider("contrast").setRange(-100, 100.0).setValue(0.0).setPosition(cp5_mx,130+cp5_my);
     cp5.addSlider("threshold").setRange(0.0, 1.0).setValue(1.0).setPosition(cp5_mx,140+cp5_my);
     cp5.addSlider("exposure").setRange(0.0, 4.0).setValue(1.0).setPosition(cp5_mx,150+cp5_my);
+    cp5.addSlider("sort: black value").setRange(-20000000, 0).setValue(-10000000).setPosition(cp5_mx,160+cp5_my);
   }
 
   void controlEvent(ControlEvent theEvent) {
@@ -149,6 +150,10 @@ public class ControlFrame extends PApplet {
     }
     if (theEvent.isFrom(cp5.getController("exposure"))) {
       exp_val = (theEvent.getController().getValue());
+    }
+
+    if (theEvent.isFrom(cp5.getController("sort: black value"))) {
+      blackValue = int((theEvent.getController().getValue()));
     }
   }
 

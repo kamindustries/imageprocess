@@ -29,10 +29,21 @@ private ControlP5 cp5;
 ControlFrame cf;
 
 PImage display;
+PImage capture_img;
 color pixel_value;
 
+// S O R T I N G
+int mode = 0;
+int loops = 1;
+int blackValue = -10000000;
+int brigthnessValue = 60;
+int whiteValue = -6000000;
+int row = 0;
+int column = 0;
+boolean saved = false;
+
 int capture_window_posX = 0;
-int capture_window_posY = 0;
+int capture_window_posY = 100;
 int capture_window_width = 1150;
 int capture_window_height = 480;
 boolean capture_pause = false;
