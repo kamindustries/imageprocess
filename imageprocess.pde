@@ -33,7 +33,7 @@ color pixel_value;
 
 int capture_window_posX = 0;
 int capture_window_posY = 0;
-int capture_window_width = 640;
+int capture_window_width = 1150;
 int capture_window_height = 480;
 boolean capture_pause = false;
 boolean update_capture_window = true;

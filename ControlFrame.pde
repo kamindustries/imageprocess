@@ -34,7 +34,7 @@ public class ControlFrame extends PApplet {
     cp5.addSlider("x").setRange(0, 1440).setPosition(cp5_mx,10+cp5_my);
     cp5.addSlider("y").plugTo(parent,"x").setRange(0, 900).setPosition(cp5_mx,20+cp5_my);
 
-    cp5.addSlider("width").setRange(4, 1440).setValue(640).setPosition(cp5_mx,40+cp5_my);
+    cp5.addSlider("width").setRange(4, 1440).setValue(1150).setPosition(cp5_mx,40+cp5_my);
     cp5.addSlider("height").setRange(4, 900).setValue(480).setPosition(cp5_mx,50+cp5_my);
     
     // Set up RGB cc sliders and reset buttons
@@ -120,7 +120,6 @@ public class ControlFrame extends PApplet {
       for (int i = 0; i < size; i++) {
         int n = (int)checkbox_toggles.getArrayValue()[i];
         fx_toggle[n] = (int)checkbox_toggles.getArrayValue()[n];
-        print(fx_toggle[n]+", ");
         }
 
         // update brightness appropriately

@@ -1,5 +1,4 @@
 void draw() {
-  if (frameCount==0) println("started drawing");
   background(0);
 
   // Update size of display window because a slider was adjusted
@@ -24,21 +23,17 @@ void draw() {
   bwShader.set("ttime", float(millis())*.0001);
   shader(bwShader);
 
-  // noStroke();
-  // fill(0);
   image(display, 0, 0, capture_window_width, capture_window_height);
-  // texture(display);
-  // box(capture_window_width, capture_window_height, 1);  
   
   resetShader();
 
   
-  stroke(0);
   textFont(font1);
-  fill(0);
-  text(frameRate, capture_window_width - 50, 10);  
+  noStroke();
+  fill(0,210);
+  rect(capture_window_width - 50, 0, 50, 10);
+  fill(255,210);
+  text(frameRate, capture_window_width - 50, 10); 
   // shape(grid);
-
-
 
 }

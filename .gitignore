@@ -1,3 +1,4 @@
 backup/*
 build-tmp/*
 data/bwShader.glsl
+images/*
