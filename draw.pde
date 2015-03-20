@@ -9,30 +9,23 @@ void draw() {
   }
 
   // render the image
-  if (frameCount%24==0) bwShader = loadShader("shader.frag");
-  bwShader.set("brightness_val", brightness_val);
-  bwShader.set("contrast_val", contrast_val);
-  bwShader.set("threshold", threshold_val);
-  bwShader.set("exp_val", exp_val);
-  bwShader.set("red", red_val);
-  bwShader.set("green", green_val);
-  bwShader.set("blue", blue_val);
-  bwShader.set("brightness_type", fx_toggle[0]);
-  bwShader.set("contrast_type", fx_toggle[1]);
-  bwShader.set("threshold_tog", fx_toggle[2]);
-  bwShader.set("ttime", float(millis())*.0001);
-  shader(bwShader);
+  if (update_shader > 0) {
+    if (frameCount%48==0) bwShader = loadShader("shader.frag");
+  }
+  // update shader with slider settings
+  updateShaderVariables();
 
+  // apply shader and display the image
+  shader(bwShader);
   image(display, 0, 0, capture_window_width, capture_window_height);
   resetShader();
 
-  
+  // display framerate at top right corner
   textFont(font1);
   noStroke();
   fill(0,210);
   rect(capture_window_width - 50, 0, 50, 10);
   fill(255,210);
   text(frameRate, capture_window_width - 50, 10); 
-  // shape(grid);
 
 }

@@ -14,7 +14,18 @@ void setup() {
   display = createImage(capture_window_width, capture_window_height, RGB);
   capture_img = createImage(capture_window_width, capture_window_height, RGB);
   
-  fx_toggle = new int[3]; //1: brightness type, 2: contrast type
+  cc_toggle = 0; // rgb cc mode
+  fx_toggle = new int[6];
+  /*  FX TOGGLE LEGEND:
+    0: brightness mode 
+    1: contrast mode
+    2: hue mode
+    3: saturation mode
+    4: sharpen
+    5: fancy contrast
+*/
+  sort_toggle = new int[3];
+  party_toggle = 0;
   
 
   // grid = box(0,0,capture_window_width, capture_window_height, display);

@@ -1,10 +1,17 @@
+///////////////////////////////////////////////////////////////////////
+// Pixel sorting functions by Kim Asendorf
+// Source code:
+// kimasendorf.tumblr.com/post/32936480093/processing-source-code
+// kimasendorf.com/mountain-tour/
+///////////////////////////////////////////////////////////////////////
+
 void sortRow() {
   int x = 0;
   int y = row;
   int xend = 0;
   
   while(xend < width-1) {
-    switch(mode) {
+    switch(sort_mode) {
       case 0:
         x = getFirstNotBlackX(x, y);
         xend = getNextBlackX(x, y);
@@ -49,7 +56,7 @@ void sortColumn() {
   int yend = 0;
   
   while(yend < height-1) {
-    switch(mode) {
+    switch(sort_mode) {
       case 0:
         y = getFirstNotBlackY(x, y);
         yend = getNextBlackY(x, y);
@@ -93,7 +100,7 @@ int getFirstNotBlackX(int _x, int _y) {
   int x = _x;
   int y = _y;
   color c;
-  while((c = capture_img.pixels[x + y * capture_img.width]) < blackValue) {
+  while((c = capture_img.pixels[x + y * capture_img.width]) < ui_sortBlackVal) {
     x++;
     if(x >= width) return -1;
   }
@@ -104,7 +111,7 @@ int getNextBlackX(int _x, int _y) {
   int x = _x+1;
   int y = _y;
   color c;
-  while((c = capture_img.pixels[x + y * capture_img.width]) > blackValue) {
+  while((c = capture_img.pixels[x + y * capture_img.width]) > ui_sortBlackVal) {
     x++;
     if(x >= width) return width-1;
   }
@@ -116,7 +123,7 @@ int getFirstBrightX(int _x, int _y) {
   int x = _x;
   int y = _y;
   color c;
-  while(brightness(c = capture_img.pixels[x + y * capture_img.width]) < brigthnessValue) {
+  while(brightness(c = capture_img.pixels[x + y * capture_img.width]) < ui_sortBrightVal) {
     x++;
     if(x >= width) return -1;
   }
@@ -127,7 +134,7 @@ int getNextDarkX(int _x, int _y) {
   int x = _x+1;
   int y = _y;
   color c;
-  while(brightness(c = capture_img.pixels[x + y * capture_img.width]) > brigthnessValue) {
+  while(brightness(c = capture_img.pixels[x + y * capture_img.width]) > ui_sortBrightVal) {
     x++;
     if(x >= width) return width-1;
   }
@@ -139,7 +146,7 @@ int getFirstNotWhiteX(int _x, int _y) {
   int x = _x;
   int y = _y;
   color c;
-  while((c = capture_img.pixels[x + y * capture_img.width]) > whiteValue) {
+  while((c = capture_img.pixels[x + y * capture_img.width]) > ui_sortWhiteVal) {
     x++;
     if(x >= width) return -1;
   }
@@ -150,7 +157,7 @@ int getNextWhiteX(int _x, int _y) {
   int x = _x+1;
   int y = _y;
   color c;
-  while((c = capture_img.pixels[x + y * capture_img.width]) < whiteValue) {
+  while((c = capture_img.pixels[x + y * capture_img.width]) < ui_sortWhiteVal) {
     x++;
     if(x >= width) return width-1;
   }
@@ -164,7 +171,7 @@ int getFirstNotBlackY(int _x, int _y) {
   int y = _y;
   color c;
   if(y < height) {
-    while((c = capture_img.pixels[x + y * capture_img.width]) < blackValue) {
+    while((c = capture_img.pixels[x + y * capture_img.width]) < ui_sortBlackVal) {
       y++;
       if(y >= height) return -1;
     }
@@ -177,7 +184,7 @@ int getNextBlackY(int _x, int _y) {
   int y = _y+1;
   color c;
   if(y < height) {
-    while((c = capture_img.pixels[x + y * capture_img.width]) > blackValue) {
+    while((c = capture_img.pixels[x + y * capture_img.width]) > ui_sortBlackVal) {
       y++;
       if(y >= height) return height-1;
     }
@@ -191,7 +198,7 @@ int getFirstBrightY(int _x, int _y) {
   int y = _y;
   color c;
   if(y < height) {
-    while(brightness(c = capture_img.pixels[x + y * capture_img.width]) < brigthnessValue) {
+    while(brightness(c = capture_img.pixels[x + y * capture_img.width]) < ui_sortBrightVal) {
       y++;
       if(y >= height) return -1;
     }
@@ -204,7 +211,7 @@ int getNextDarkY(int _x, int _y) {
   int y = _y+1;
   color c;
   if(y < height) {
-    while(brightness(c = capture_img.pixels[x + y * capture_img.width]) > brigthnessValue) {
+    while(brightness(c = capture_img.pixels[x + y * capture_img.width]) > ui_sortBrightVal) {
       y++;
       if(y >= height) return height-1;
     }
@@ -218,7 +225,7 @@ int getFirstNotWhiteY(int _x, int _y) {
   int y = _y;
   color c;
   if(y < height) {
-    while((c = capture_img.pixels[x + y * capture_img.width]) > whiteValue) {
+    while((c = capture_img.pixels[x + y * capture_img.width]) > ui_sortWhiteVal) {
       y++;
       if(y >= height) return -1;
     }
@@ -231,7 +238,7 @@ int getNextWhiteY(int _x, int _y) {
   int y = _y+1;
   color c;
   if(y < height) {
-    while((c = capture_img.pixels[x + y * capture_img.width]) < whiteValue) {
+    while((c = capture_img.pixels[x + y * capture_img.width]) < ui_sortWhiteVal) {
       y++;
       if(y >= height) return height-1;
     }
