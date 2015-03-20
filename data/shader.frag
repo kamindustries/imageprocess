@@ -343,7 +343,8 @@ const mat2 m = mat2( 0.80,  0.60, -0.60,  0.80 );
 
 float noise( in vec2 x ) {
   // ** P A R T Y ** 
-  float s = ttime * .3;
+  float s = ttime * ui_party * 100.;
+  if (ui_party*100.>.9) s *= pow(ui_party*200.,3.);
   return sin(2.5*x.x-s)*sin(1.5*x.y+s);
   // return sin((1.5*(s+x.x)))*sin(1.5*(s+x.y));
   // return sin((s*(1.5*x.x)))*sin(s*(1.5*x.y));
@@ -379,7 +380,8 @@ float func( vec2 q, vec3 _col, out vec4 ron )
 {
   // animation speed
   // ** P A R T Y ** 
-  float s = pow(ui_party * 1000., 3.);
+  float s = pow(ui_party * 200., 4.);
+  // s = 1.;
   // float s = (ttime * .1) - (2. * (ttime * .1));
 
   float ql = length( q );
@@ -388,14 +390,14 @@ float func( vec2 q, vec3 _col, out vec4 ron )
   q *= 0.5;
 
   vec2 o = vec2(0.0);
-    o.x = 0.5 + 0.5*fbm4( vec2(2.0*q          )  );
-    o.y = 0.5 + 0.5*fbm4( vec2(2.0*q+vec2(5.2))  );
+    o.x = 0.5 + 0.5*fbm4( vec2(2.0*q +vec2(s*5000.)         )  );
+    o.y = 0.5 + 0.5*fbm4( vec2(2.0*q+vec2(5.2) - vec2(s))  );
 
   float ol = length( o );
-    // o.x += s + 0.02*sin(0.12+ol)/ol;
-    o.x += 0.02*sin(0.12+ol)/ol;
-    // o.y += s + 0.02*sin(0.14+ol)/ol;
-    o.y += 0.02*sin(0.14+ol)/ol;
+    o.x += s + 0.02*sin(0.12+ol)/ol;
+    // o.x += 0.02*sin(0.12+ol)/ol;
+    o.y += s + 0.02*sin(0.14+ol)/ol;
+    // o.y += 0.02*sin(0.14+ol)/ol;
 
     vec2 n;
     n.x = fbm4( vec2(4.0*o+vec2(9.2))  );
@@ -423,11 +425,11 @@ vec2 pattern(vec2 p, float _mult, vec3 _col, out float f) {
 
   // scale original mix with noise
   // ** P A R T Y ** 
-  float b = getB(_col);
+  // float b = getB(_col);
   // b = 1.-b;
-  b *= pow(ui_party,.1);
+  // b *= pow(ui_party,.1);
   // float mult = _mult*2.;
-  float mult = _mult*b;
+  float mult = _mult * pow(_mult*2., 2.);
   f = f * mult;
   return vec2(q.x+f, q.y+f);
 }
@@ -442,7 +444,8 @@ void main() {
   vec4 col = texture2D(texture, vertTexCoord.st);
   if (ui_party>=0.0001){
     col = texture2D(texture, pattern(vertTexCoord.st, ui_party*100., col.rgb, fbm));
-    col.rgb = Hue(col.rgb, ttime+(ui_party*3.1415));
+    col.rgb = Hue(col.rgb, ttime*ui_party*1000.+(ui_party*3.1415));
+    if (ui_party*100. >= .9) col.rgb = Saturation(col.rgb, ttime + ui_party * 400.);
     // col = texture2D(texture, vec2(vertTexCoord.s+.1, sin(vertTexCoord.t)));
   } 
   

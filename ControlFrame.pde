@@ -234,7 +234,7 @@ public class ControlFrame extends PApplet {
       ;
     cp5.addSlider("party")
       .setPosition(cp5_mx,250+cp5_my)
-      .setRange(-1., 1.)
+      .setRange(0., 1.)
       .setValue(0.0)
       ;
 
