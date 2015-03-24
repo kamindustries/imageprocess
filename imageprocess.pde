@@ -1,4 +1,8 @@
 /*
+TO DO:
+  - ignore central pixel from sharpening kernel
+  - exponential falloff of kernal sampling positions for nice contrast
+
 This is based on combining ControlP5 Controlframe with a screen capture
 technique. 
 
@@ -11,12 +15,8 @@ to generate live screen capture data. The library is several years old though
 and no longer works due to an update to Java's way of handling transparent 
 windows.
 
-Most of the comments come from the copied code.
-
 Original Github comment:
-
 https://github.com/onformative/ScreenCapturer/issues/2
-
 
 BCH Color Coordinate System. S. Bezryadin, P. Bourov:
 
@@ -26,10 +26,12 @@ systems-for-accurate-color-image-editing-software
 http://web.archive.org/web/20130810054448/http://
 www.kweii.com/site/color_theory/2007_LV/BrightnessCalculation.pdf
 
-
 Pixel sorting by Kim Asendorf:
-
 kimasendorf.com/mountain-tour/
+
+OpenGL domain warping reference, Inigo Quilez
+http://www.iquilezles.org/www/articles/warp/warp.htm:
+
 
  */
 
