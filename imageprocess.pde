@@ -3,6 +3,21 @@ TO DO:
   - ignore central pixel from sharpening kernel
   - exponential falloff of kernal sampling positions for nice contrast
 
+CONTROLS:
+  - X and Y adjust the position of the capture window
+  - WIDTH and HEIGHT adjust the dimensions of both the capture window and the display window
+    (it is always 1:1, no scaling)
+  - The left toggles will switch to BCH colorspace for BRIGHTNESS, CONTRAST, HUE, and SATURATION.
+    By default, it is linear RGB colorspace, except for HUE which defaults to HSV.
+  - The right buttons reset each value to default
+  - For pixel sorting, the left toggle will enable that sorting method. Only one is allowed at
+    a time, so the others will switch off if you change the method.
+  - The update shader button enables reloading of the shader every 24 frames, allowing for
+    pseudo-live coding. This causes some lag though.
+  - Currently the left toggle for RED/GREEN/BLUE switches to BCH color space but the math is 
+    incorrenct at the moment.
+
+
 This is based on combining ControlP5 Controlframe with a screen capture
 technique. 
 

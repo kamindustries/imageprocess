@@ -3,8 +3,8 @@
   knobs and sliders.
 */
 
-int pos_window_x_start = 100;
-int pos_window_y_start = 100;
+int pos_window_x_start = 0;
+int pos_window_y_start = 0;
 
 ControlFrame addControlFrame(String theName, int theWidth, int theHeight) {
   Frame f = new Frame(theName);
@@ -78,25 +78,25 @@ public class ControlFrame extends PApplet {
     // C A P T U R E   C O N T R O L
     ///////////////////////////////////////////////////////////////////////
     cp5.addSlider("x")
-      .setRange(0, 1440)
+      .setRange(0, 1920)
       .setPosition(cp5_mx,10+cp5_my)
       .setValue(pos_window_x_start)
       ;
     cp5.addSlider("y")
       .plugTo(parent,"x")
-      .setRange(0, 900)
+      .setRange(0, 1200)
       .setPosition(cp5_mx,20+cp5_my)
       .setValue(pos_window_y_start)
       ;
 
     cp5.addSlider("width")
-      .setRange(4, 1440)
-      .setValue(1150)
+      .setRange(4, 1920)
+      .setValue(900)
       .setPosition(cp5_mx,35+cp5_my)
       ;
     cp5.addSlider("height")
-      .setRange(4, 900)
-      .setValue(480)
+      .setRange(4, 1180)
+      .setValue(1100)
       .setPosition(cp5_mx,45+cp5_my)
       ;
     
@@ -440,7 +440,6 @@ public class ControlFrame extends PApplet {
     if (theEvent.isFrom(checkbox_fx)) {
       int size = checkbox_fx.getArrayValue().length;
       fx_toggle = new int[size];
-      println("size: "+size);
       for (int i=0; i<size; i++){
         int n = (int)checkbox_fx.getArrayValue()[i];
         fx_toggle[i] = n;
